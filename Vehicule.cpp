@@ -21,10 +21,17 @@ virtual void Vehicule::depanner(){
 }
 
 virtual void Vehicule::accelerer(int increment){
-	vitesse_ += increment;
-	if (vitesse_ > vitesseMax_){
-		vitesse_ = vitesseMax_;
-	}
+    try{
+        if(vitesse_<0) {
+            if (vitesse_+increment < vitesseMax_){
+                vitesse_ += increment;
+            } else throw std::string("Vitesse max atteinte !");  
+        } else throw std::string("Vitesse négative !");  
+    } catch (std::string const& err_msg) {
+        std::cerr << "Exception: " << err_msg << std::endl;
+    }
+
+	
 }
 
 virtual void Vehicule::monter(int nbOcc){
