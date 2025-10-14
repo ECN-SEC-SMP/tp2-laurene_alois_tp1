@@ -44,10 +44,13 @@ public:
     virtual string getEtat() const;
     
     virtual ~Vehicule();
+
     friend ostream& operator<<(ostream& s,Vehicule const& v);
+
 };
 
 // opérateur d'affichage
 ostream& operator<<(ostream& s,Vehicule const& v);
 
 #endif /* Vehicule_hpp */
+
