@@ -9,8 +9,7 @@ public:
     Bateau(int vitesseMax=0, int nbPlaces=1, int occupants=0) : Vehicule(vitesseMax, nbPlaces, occupants) {}
     ~Bateau() override = default;
 
-    friend void Vehicule::demarrer();
-    
-    friend void Vehicule::arreter();
+    void demarrer() override;
+    void arreter()  override;
 
 };

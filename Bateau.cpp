@@ -1,9 +1,9 @@
 #include "Bateau.hpp"
 
-void Vehicule::demarrer(){
+void Bateau::demarrer(){
     cout<<"Démarrage d'un bateau."<<endl;
 }
     
-void Vehicule::arreter(){
+void Bateau::arreter(){
     cout<<"Arret d'un bateau."<<endl;
 }
