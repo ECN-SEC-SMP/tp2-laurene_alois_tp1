@@ -1,27 +1,27 @@
 #include "Vehicule.hpp"
 
 
-Vehicule::Vehicule(int vitesseMax, int nbPlaces, int occupants){
-	this->vitesseMax_ = vitesseMax;
-	this->nbPlaces_ = nbPlaces;
-	this->occupants_ = occupants;	
+
+Vehicule::Vehicule(int vitesseMax, int nbPlaces, int occupants) {
+    this->vitesseMax_ = vitesseMax;
+    this->nbPlaces_   = nbPlaces;
+    this->occupants_  = occupants;
+    this->vitesse_    = 0;       // <-- IMPORTANT
+    this->etat_       = ARRET;   // <-- IMPORTANT
 }
 
 void Vehicule::demarrer(){
     try{
+        if(etat_ == PANNE_LEGERE) throw std::string("à cause d'une panne légère");
+        if(etat_ == PANNE_SEVERE) throw std::string("à cause d'une panne sévère");
+        if(etat_ == MARCHE) throw std::string("parce qu'elle est déjà en marche");
         if(etat_ == ARRET){
             etat_ = MARCHE;
+            this->vitesse_= 0;
         } else cout<<"La voiture ne peut pas démarrer..."<<endl; 
-        if(etat_ == PANNE_LEGERE){
-        } else throw std::string("à cause d'une panne légère");
-        if(etat_ == PANNE_SEVERE){
-        } else throw std::string("à cause d'une panne sévère");
-        if(etat_ == MARCHE){
-        } else throw std::string("parce qu'elle est déjà en marche");
     } catch (std::string const& err_msg) {
         std::cerr << "Exception: " << err_msg << std::endl;
     }
-	
 }
 
 void Vehicule::arreter(){
@@ -34,19 +34,15 @@ void Vehicule::depanner(){
 	}
 }
 
-void Vehicule::accelerer(int increment){
-    try{
-        if(vitesse_<0) {
-            if (vitesse_+increment < vitesseMax_){
-                
-                vitesse_ += increment;
-            } else throw std::string("Vitesse max atteinte !");  
-        } else throw std::string("Vitesse négative !");  
-    } catch (std::string const& err_msg) {
+void Vehicule::accelerer(int increment) {
+    try {
+        // avant : testait vitesse_ < 0 (inversé) -> d’où "Vitesse négative !" à 0
+        if (increment <= 0)                  throw string("Vitesse négative !");
+        if (vitesse_ + increment > vitesseMax_) throw string("Vitesse max atteinte !");
+        vitesse_ += increment;
+    } catch (string const& err_msg) {
         std::cerr << "Exception: " << err_msg << std::endl;
     }
-
-	
 }
 
 void Vehicule::monter(int nbOcc){
