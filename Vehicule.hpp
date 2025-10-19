@@ -43,8 +43,7 @@ public:
     
     virtual string getEtat() const;
     
-    virtual ~Vehicule();
-
+    virtual ~Vehicule() = default; 
     friend ostream& operator<<(ostream& s,Vehicule const& v);
 
 };
@@ -53,4 +52,3 @@ public:
 ostream& operator<<(ostream& s,Vehicule const& v);
 
 #endif /* Vehicule_hpp */
-
